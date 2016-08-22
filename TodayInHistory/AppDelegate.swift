@@ -17,6 +17,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        if (defaults.stringForKey("CurrentEmail") != nil) {
+            
+            let tabVC = storyboard.instantiateViewControllerWithIdentifier("TabVC") as! UITabBarController
+            
+            self.window?.rootViewController = tabVC
+            self.window?.makeKeyAndVisible()
+            
+        }
+        else {
+            let navVC = storyboard.instantiateViewControllerWithIdentifier("NavVC") as! UINavigationController
+            
+            self.window?.rootViewController = navVC
+            self.window?.makeKeyAndVisible()
+        }
         return true
     }
 
